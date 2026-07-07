@@ -688,23 +688,26 @@ document.getElementById('btn-buy').addEventListener('click', () => {
   ).join('\n');
 
   const freteTexto = hasFreteCalc
-    ? `\n*Frete PAC estimado:* R$ ${freteVal.toFixed(2).replace('.',',')} (${pesoFinal}g → ${cidadeDestino})`
-    : '\n*Frete:* a calcular (CEP não informado)';
+    ? `\n\u{1F4E6} *Frete PAC estimado:* R$ ${freteVal.toFixed(2).replace('.',',')} (${pesoFinal}g \u2192 ${cidadeDestino})`
+    : `\n\u{1F4E6} *Frete:* a calcular (CEP n\u00E3o informado)`;
 
   const cepTexto = cepValido && cepInput.value
-    ? `\n*CEP destino:* ${cepInput.value} — ${cidadeDestino}`
+    ? `\n\u{1F4CD} *CEP destino:* ${cepInput.value} \u2014 ${cidadeDestino}`
     : '';
 
-  const msg =
-`Olá! Tenho interesse nos seguintes jogos:
-
-${linhas}
-
-*Subtotal:* R$ ${subtotal},00${freteTexto}${cepTexto}
-━━━━━━━━━━━━━━━━━━
-*Total estimado:* R$ ${total.toFixed(2).replace('.',',')}
-
-Aguardo seu retorno!`;
+  const msg = [
+    `\u{1F3AE} Ol\u00E1! Tenho interesse nos seguintes jogos:`,
+    ``,
+    linhas,
+    ``,
+    `\u{1F4B0} *Subtotal:* R$ ${subtotal},00`,
+    freteTexto.trimStart(),
+    cepTexto ? cepTexto.trimStart() : null,
+    `\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`,
+    `\u2705 *Total estimado:* R$ ${total.toFixed(2).replace('.',',')}`,
+    ``,
+    `Aguardo seu retorno!`
+  ].filter(l => l !== null).join('\n');
 
   const url = `https://wa.me/5511977290572?text=${encodeURIComponent(msg)}`;
   window.open(url, '_blank');

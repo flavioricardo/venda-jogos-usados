@@ -684,24 +684,24 @@ document.getElementById('btn-buy').addEventListener('click', () => {
   const total    = subtotal + (freteVal || 0);
 
   const linhas = selected.map((g, i) =>
-    `${String(i+1).padStart(2,'0')}. ${g.name} (${g.plat}) - R$ ${g.minPrice}`
+    `${String(i+1).padStart(2,'0')}. ${g.name} (${g.plat}) — R$ ${g.minPrice}`
   ).join('\n');
 
   const freteTexto = hasFreteCalc
-    ? `\n*Frete PAC estimado:* R$ ${freteVal.toFixed(2).replace('.',',')} (${pesoFinal}g - ${cidadeDestino})`
-    : '\n*Frete:* a calcular (CEP nao informado)';
+    ? `\n*Frete PAC estimado:* R$ ${freteVal.toFixed(2).replace('.',',')} (${pesoFinal}g → ${cidadeDestino})`
+    : '\n*Frete:* a calcular (CEP não informado)';
 
   const cepTexto = cepValido && cepInput.value
-    ? `\n*CEP destino:* ${cepInput.value} - ${cidadeDestino}`
+    ? `\n*CEP destino:* ${cepInput.value} — ${cidadeDestino}`
     : '';
 
   const msg =
-`Ola! Tenho interesse nos seguintes jogos:
+`Olá! Tenho interesse nos seguintes jogos:
 
 ${linhas}
 
 *Subtotal:* R$ ${subtotal},00${freteTexto}${cepTexto}
----
+━━━━━━━━━━━━━━━━━━
 *Total estimado:* R$ ${total.toFixed(2).replace('.',',')}
 
 Aguardo seu retorno!`;
